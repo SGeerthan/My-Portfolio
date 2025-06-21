@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import emailjs from "@emailjs/browser"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -53,7 +53,7 @@ const projects = [
     title: "Bridal Vision Studio",
     description:
       "An e-commerce website with virtual try-on feature for jewelry and AI-powered skin detection system to suggest personalized dress recommendations, enhancing the shopping experience with interactive and tailored suggestions.",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/bvs.png?height=200&width=300",
     technologies: ["MERN Stack", "Python", "AI/ML", "Virtual Try-On"],
     category: "Full Stack",
     github: "https://github.com/SGeerthan",
@@ -64,7 +64,7 @@ const projects = [
     title: "Tech-Hostel",
     description:
       "A user-friendly online hostel management web application with responsive design. Features secure payment processing via e-wallet, ensuring a trustworthy platform for financial transactions.",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/hostel.png?height=200&width=300",
     technologies: ["ReactJS", "MongoDB", "ExpressJS", "NodeJS", "CSS"],
     category: "Full Stack",
     github: "https://github.com/SGeerthan",
@@ -75,7 +75,7 @@ const projects = [
     title: "MealMatch",
     description:
       "A platform connecting restaurants with surplus food to orphanages and students in need. Promotes sustainability by reducing food waste while addressing hunger, aligning with UN's Zero Hunger SDG.",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/mealmatch.jpg?height=200&width=300",
     technologies: ["React Native", "NodeJS", "ExpressJS", "MongoDB", "Firebase"],
     category: "Mobile",
     github: "https://github.com/SGeerthan",
@@ -86,7 +86,7 @@ const projects = [
     title: "Faster Eats",
     description:
       "A scalable microservices-based food delivery app using Docker for containerization and Kubernetes for orchestration, with OpenStreetMap API and PayHere Payment gateway integration.",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/fasterEats.png?height=200&width=300",
     technologies: ["MERN Stack", "Docker", "Kubernetes", "OpenStreetMap API", "PayHere"],
     category: "Full Stack",
     github: "https://github.com/SGeerthan",
@@ -97,7 +97,7 @@ const projects = [
     title: "Lankan Medical",
     description:
       "A full-stack web application with responsive design, featuring authentication and authorization functionalities to improve user and administrator interaction within the system.",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/healthcare.png?height=200&width=300",
     technologies: ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
     category: "Full Stack",
     github: "https://github.com/SGeerthan",
@@ -108,18 +108,18 @@ const projects = [
     title: "REST Countries API",
     description:
       "A responsive React app using REST Countries API with country search, filtering, and an interactive flag game with user authentication and score tracking.",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/countries.png?height=200&width=300",
     technologies: ["React", "Tailwind CSS", "Firebase", "REST API"],
     category: "Frontend",
     github: "https://github.com/SGeerthan",
-    live: "#",
+    live: "https://apicountries-weirdo.netlify.app/",
   },
   {
     id: 7,
     title: "Expenses Management",
     description:
       "Android app with onboarding screen and functionality to add and view expenses with basic CRUD operations using Room library as database. Includes expense sum calculation feature.",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/expensesManagement.jpg?height=200&width=300",
     technologies: ["Kotlin", "Room Database", "Android"],
     category: "Mobile",
     github: "https://github.com/SGeerthan",
@@ -211,7 +211,7 @@ function Hero() {
         >
           <motion.div variants={fadeInUp} className="mb-8">
             <Image
-              src="/mypic.jpg?height=500&width=400"
+              src="/sangee.jpg?height=500&width=400"
               alt="Profile"
               width={300}
               height={300}
@@ -409,9 +409,9 @@ function Projects() {
                       <Image
                         src={project.image || "/placeholder.svg"}
                         alt={project.title}
-                        width={300}
-                        height={200}
-                        className="w-full h-48 object-cover transition-transform hover:scale-105"
+                        width={250}
+                        height={150}
+                        className="w-full h-40 object-cover transition-transform hover:scale-105"
                       />
                       <div className="absolute top-2 right-2">
                         <Badge>{project.category}</Badge>
@@ -509,7 +509,7 @@ function Skills() {
 }
 
 function Contact() {
-  const [formData, setFormData] = useState({
+ const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
@@ -517,10 +517,24 @@ function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", formData)
-    // Reset form
-    setFormData({ name: "", email: "", message: "" })
+
+    emailjs
+      .send(
+        "service_8bqmp5y", // from EmailJS dashboard
+        "template_61fbn0f", // from EmailJS dashboard
+        formData,
+        "NmrbaUOHADlbQ8ZNQ" // from EmailJS account
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!")
+          setFormData({ name: "", email: "", message: "" })
+        },
+        (error) => {
+          alert("Failed to send message. Please try again.")
+          console.error(error)
+        }
+      )
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
