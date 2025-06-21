@@ -411,7 +411,7 @@ function Projects() {
                         alt={project.title}
                         width={250}
                         height={150}
-                        className="w-full h-40 object-cover transition-transform hover:scale-105"
+                        className="w-full h-48 transition-transform hover:scale-105"
                       />
                       <div className="absolute top-2 right-2">
                         <Badge>{project.category}</Badge>
