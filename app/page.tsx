@@ -86,7 +86,7 @@ const projects = [
     title: "Faster Eats",
     description:
       "A scalable microservices-based food delivery app using Docker for containerization and Kubernetes for orchestration, with OpenStreetMap API and PayHere Payment gateway integration.",
-    image: "/fasterEats.png?height=200&width=300",
+    image: "/fastereats.png?height=200&width=300",
     technologies: ["MERN Stack", "Docker", "Kubernetes", "OpenStreetMap API", "PayHere"],
     category: "Full Stack",
     github: "https://github.com/SGeerthan",
